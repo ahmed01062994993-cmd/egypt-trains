@@ -1,20 +1,27 @@
-<div class="search-box">
-    <div class="input-group">
-        <label>محطة القيام:</label>
-        <input type="text" id="fromInput" placeholder="اكتب اسم المحطة (مثلاً: القاهرة)" onkeyup="filterStations('from')">
-        <div id="fromList" class="autocomplete-list"></div>
-    </div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قطارات مصر - بحث ذكي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><h1>🚆 بحث قطارات مصر</h1></header>
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="fromInput" placeholder="محطة القيام..." onkeyup="filterStations('from')">
+            <div id="fromList" class="autocomplete-list"></div>
 
-    <div class="input-group">
-        <label>محطة الوصول:</label>
-        <input type="text" id="toInput" placeholder="اكتب اسم المحطة (مثلاً: المنيا)" onkeyup="filterStations('to')">
-        <div id="toList" class="autocomplete-list"></div>
-    </div>
+            <input type="text" id="toInput" placeholder="محطة الوصول..." onkeyup="filterStations('to')">
+            <div id="toList" class="autocomplete-list"></div>
 
-    <div class="input-group">
-        <label>أو ابحث برقم القطار مباشرة:</label>
-        <input type="number" id="trainNumberInput" placeholder="رقم القطار (مثلاً: 980)">
+            <input type="number" id="trainNumberInput" placeholder="أو رقم القطار مباشرة...">
+            
+            <button onclick="smartSearch()">بحث الآن</button>
+        </div>
+        <div id="resultsArea"></div>
     </div>
-
-    <button onclick="smartSearch()">بحث سريع</button>
-</div>
+    <script src="script.js"></script>
+</body>
+</html>
