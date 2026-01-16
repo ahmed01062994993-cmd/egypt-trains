@@ -1,85 +1,33 @@
-:root {
-    --burgundy: #800020; /* اللون النبيتي */
-    --black: #1a1a1a;
-    --white: #ffffff;
-    --gray: #f4f4f4;
+.badge {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
 }
 
-body {
-    background-color: var(--black);
-    color: var(--white);
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    direction: rtl;
-    padding: 20px;
-}
-
-header {
-    background-color: var(--burgundy);
-    padding: 20px;
-    text-align: center;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    border-bottom: 4px solid var(--white);
-}
-
-.search-box {
-    background-color: var(--white);
-    padding: 25px;
-    border-radius: 15px;
-    color: var(--black);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-}
-
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 2px solid var(--burgundy);
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-button {
-    width: 100%;
-    padding: 15px;
-    background-color: var(--burgundy);
-    color: var(--white);
-    border: none;
-    border-radius: 8px;
-    font-size: 18px;
+details summary {
+    margin-top: 10px;
     font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+    outline: none;
 }
 
-button:hover {
-    background-color: #5a0016;
-    transform: scale(1.02);
+ul {
+    list-style-type: none;
+    border-right: 2px solid #800020;
+    margin-top: 10px;
 }
 
-.autocomplete-list {
-    background: white;
-    color: black;
-    border: 1px solid #ccc;
-    position: absolute;
-    width: 85%;
-    z-index: 100;
-    max-height: 150px;
-    overflow-y: auto;
+li {
+    margin-bottom: 5px;
+    position: relative;
 }
 
-.result-card {
-    background-color: var(--white);
-    color: var(--black);
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    border-right: 10px solid var(--burgundy);
-    animation: slideIn 0.5s ease;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+li::before {
+    content: "•";
+    color: #800020;
+    font-weight: bold;
+    display: inline-block; 
+    width: 1em;
+    margin-right: -1em;
 }
