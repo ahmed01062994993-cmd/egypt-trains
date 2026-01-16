@@ -1,15 +1,66 @@
-{
-  "stations": [
-    "القاهرة", "الجيزة", "الإسكندرية", "سيدي جابر", "بنها", "قليوب", "قويسنا", "بركة السبع", "طنطا", "كفر الزيات", "إيتاي البارود", "دمنهور", "أبو حمص", "كفر الدوار",
-    "بني سويف", "الواسطي", "ببا", "الفشن", "مغاغة", "بني مزار", "مطاي", "سمالوط", "المنيا", "أبو قرقاص", "ملوي", "ديرمواس", "ديروط", "القوصية", "منفلوط", "أسيوط", "أبو تيج", "صدفا", "طما", "طهطا", "المراغة", "سوهاج", "المنشأة", "جرجا", "البلينا", "أبو تشت", "فرشوط", "نجع حمادي", "دشنا", "قنا", "قفط", "قوص", "الأقصر", "إسنا", "إدفو", "كلابشة", "كوم أمبو", "دراو", "أسوان",
-    "الزقازيق", "أبو حماد", "الإسماعيلية", "القنطرة غرب", "بورسعيد", "السويس", "أبو كبير", "فاقوس", "الصالحية", "المنصورة", "طلخا", "شربين", "دمياط", "المحلة الكبرى", "كفر الشيخ", "دسوق", "قلين", "بيلا", "مرسى مطروح", "الفيوم"
-  ],
-  "trains": [
-    {"id": "2025", "from": "القاهرة", "to": "الإسكندرية", "dep": "08:00 ص", "type": "تالجو", "price": "275 ج"},
-    {"id": "2030", "from": "القاهرة", "to": "أسوان", "dep": "07:00 م", "type": "تالجو", "price": "700 ج"},
-    {"id": "980", "from": "القاهرة", "to": "أسوان", "dep": "08:00 ص", "type": "VIP", "price": "350 ج"},
-    {"id": "901", "from": "القاهرة", "to": "الإسكندرية", "dep": "08:10 ص", "type": "VIP", "price": "145 ج"},
-    {"id": "164", "from": "المنيا", "to": "القاهرة", "dep": "03:40 م", "type": "روسي", "price": "55 ج"},
-    {"id": "2006", "from": "القاهرة", "to": "أسيوط", "dep": "05:15 م", "type": "VIP", "price": "195 ج"}
-  ]
+// دالة لتصفية المحطات أثناء الكتابة
+function filterStations(type) {
+    let input = document.getElementById(type + 'Input');
+    let list = document.getElementById(type + 'List');
+    let val = input.value;
+    list.innerHTML = '';
+    
+    if (!val) { list.style.display = 'none'; return; }
+
+    let suggestions = stations.filter(s => s.includes(val));
+    
+    if (suggestions.length > 0) {
+        list.style.display = 'block';
+        suggestions.forEach(s => {
+            let div = document.createElement('div');
+            div.innerHTML = s;
+            div.onclick = function() {
+                input.value = s;
+                list.style.display = 'none';
+            };
+            list.appendChild(div);
+        });
+    } else {
+        list.style.display = 'none';
+    }
+}
+
+// دالة البحث الشامل (بالمحطة أو برقم القطار)
+function smartSearch() {
+    const from = document.getElementById('fromInput').value;
+    const to = document.getElementById('toInput').value;
+    const trainNum = document.getElementById('trainNumberInput').value;
+    const area = document.getElementById('resultsArea');
+    
+    let results = [];
+
+    // لو المستخدم كاتب رقم قطار، الأولوية ليه
+    if (trainNum) {
+        results = allData.trains.filter(t => t.id === trainNum);
+    } else if (from && to) {
+        results = allData.trains.filter(t => t.from === from && t.to === to);
+    } else {
+        alert("من فضلك ادخل محطة القيام والوصول أو رقم القطار");
+        return;
+    }
+
+    renderResults(results);
+}
+
+function renderResults(results) {
+    const area = document.getElementById('resultsArea');
+    area.style.display = "block";
+    if (results.length > 0) {
+        area.innerHTML = `<h3>نتائج البحث (${results.length}):</h3>`;
+        results.forEach(t => {
+            area.innerHTML += `
+                <div class="result-card">
+                    <p class="train-no">قطار ${t.id} - ${t.type}</p>
+                    <p>من: ${t.from} | إلى: ${t.to}</p>
+                    <p>🕒 القيام: ${t.dep} | السعر: ${t.price}</p>
+                </div>`;
+        });
+    } else {
+        area.innerHTML = "<div class='result-card' style='background:#c0392b;'>❌ لم يتم العثور على نتائج مطابقة</div>";
+    }
 }
