@@ -3,42 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قطارات مصر - الدليل الكامل</title>
+    <title>دليل قطارات مصر الشامل</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header><h1>🚆 موسوعة قطارات مصر</h1></header>
+    <header><h1>🚆 دليل محطات وقطارات مصر</h1></header>
     <div class="container">
         <div class="search-box">
-            <label>المغادرة من:</label>
+            <label>من محطة (القيام):</label>
             <select id="fromStation">
-                <option value="القاهرة">القاهرة</option>
-                <option value="الإسكندرية">الإسكندرية</option>
-                <option value="بنها">بنها</option>
-                <option value="طنطا">طنطا</option>
-                <option value="دمنهور">دمنهور</option>
-                <option value="بني سويف">بني سويف</option>
-                <option value="المنيا">المنيا</option>
-                <option value="أسيوط">أسيوط</option>
-                <option value="سوهاج">سوهاج</option>
-                <option value="قنا">قنا</option>
-                <option value="الأقصر">الأقصر</option>
-                <option value="أسوان">أسوان</option>
-                <option value="مرسى مطروح">مرسى مطروح</option>
+                <option value="">اختر المحطة...</option>
             </select>
-            <label>الوصول إلى:</label>
+
+            <label>إلى محطة (الوصول):</label>
             <select id="toStation">
-                <option value="الإسكندرية">الإسكندرية</option>
-                <option value="القاهرة">القاهرة</option>
-                <option value="المنيا">المنيا</option>
-                <option value="أسيوط">أسيوط</option>
-                <option value="سوهاج">سوهاج</option>
-                <option value="أسوان">أسوان</option>
-                <option value="الأقصر">الأقصر</option>
-                <option value="مرسى مطروح">مرسى مطروح</option>
+                <option value="">اختر المحطة...</option>
             </select>
-            <button onclick="findTrain()">إظهار كافة الرحلات</button>
+
+            <button onclick="findTrain()">بحث عن مواعيد</button>
         </div>
         <div id="map"></div>
         <div id="resultsArea"></div>
