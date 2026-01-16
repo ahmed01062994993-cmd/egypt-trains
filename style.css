@@ -1,7 +1,71 @@
-body { background: #121212; color: white; font-family: sans-serif; direction: rtl; padding: 15px; }
-header h1 { color: #ff9800; text-align: center; }
-.search-box { background: #1e1e1e; padding: 20px; border-radius: 15px; border: 1px solid #333; }
-select, button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; font-size: 16px; border: none; }
-select { background: #333; color: white; }
-button { background: #ff9800; color: black; font-weight: bold; cursor: pointer; }
-.result-card { background: #2e7d32; padding: 15px; border-radius: 10px; margin-top: 15px; border-right: 5px solid #ff9800; }
+:root {
+    --primary-color: #003366; /* لون السكة الحديد الأزرق */
+    --accent-color: #ff9800;
+    --bg-color: #f4f4f4;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    direction: rtl;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+}
+
+.search-box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #e68a00;
+}
+
+.result-card {
+    background: white;
+    margin-top: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    border-right: 8px solid var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.train-no { color: var(--primary-color); font-weight: bold; font-size: 20px; }
