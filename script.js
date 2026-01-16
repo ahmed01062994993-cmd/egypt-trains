@@ -1,64 +1,80 @@
-// قائمة المحطات
-const stations = ["القاهرة", "الإسكندرية", "طنطا", "دمنهور", "بنها", "المنيا", "أسيوط", "سوهاج", "قنا", "الأقصر", "أسوان", "الزقازيق", "المنصورة", "بور سعيد"];
-
-// قاعدة بيانات القطارات
-const trains = [
-    { id: "2025", from: "القاهرة", to: "الإسكندرية", dep: "08:00 ص", type: "تالجو", price: "275 ج" },
-    { id: "980", from: "القاهرة", to: "أسوان", dep: "08:00 ص", type: "VIP", price: "350 ج" },
-    { id: "164", from: "المنيا", to: "القاهرة", dep: "03:40 م", type: "روسي", price: "55 ج" },
-    { id: "901", from: "القاهرة", to: "الإسكندرية", dep: "08:10 ص", type: "إسباني", price: "145 ج" }
+// قاعدة بيانات المسارات التفصيلية (أمثلة لخطوط كاملة)
+const fullRoutes = [
+    {
+        trainId: "901",
+        type: "إسباني مكيف",
+        stops: [
+            { station: "القاهرة", time: "08:10 ص" },
+            { station: "بنها", time: "08:45 ص" },
+            { station: "طنطا", time: "09:25 ص" },
+            { station: "دمنهور", time: "10:10 ص" },
+            { station: "سيدي جابر", time: "10:50 ص" },
+            { station: "الإسكندرية", time: "11:10 ص" }
+        ]
+    },
+    {
+        trainId: "2025",
+        type: "تالجو",
+        stops: [
+            { station: "القاهرة", time: "08:00 ص" },
+            { station: "سيدي جابر", time: "10:15 ص" },
+            { station: "الإسكندرية", time: "10:30 ص" }
+        ]
+    },
+    {
+        trainId: "980",
+        type: "VIP",
+        stops: [
+            { station: "القاهرة", time: "08:00 ص" },
+            { station: "بني سويف", time: "09:30 ص" },
+            { station: "المنيا", time: "10:55 ص" },
+            { station: "أسيوط", time: "01:10 م" },
+            { station: "سوهاج", time: "02:25 م" },
+            { station: "قنا", time: "04:30 م" },
+            { station: "الأقصر", time: "05:20 م" },
+            { station: "أسوان", time: "08:40 م" }
+        ]
+    }
 ];
 
-function filterStations(type) {
-    let input = document.getElementById(type + 'Input');
-    let list = document.getElementById(type + 'List');
-    let val = input.value;
-    list.innerHTML = '';
-    if (!val) { list.style.display = 'none'; return; }
-
-    let suggestions = stations.filter(s => s.includes(val));
-    if (suggestions.length > 0) {
-        list.style.display = 'block';
-        suggestions.forEach(s => {
-            let div = document.createElement('div');
-            div.style.padding = "10px";
-            div.style.cursor = "pointer";
-            div.innerHTML = s;
-            div.onclick = function() {
-                input.value = s;
-                list.style.display = 'none';
-            };
-            list.appendChild(div);
-        });
-    }
-}
+// استخراج كافة المحطات تلقائياً من المسارات
+const stations = [...new Set(fullRoutes.flatMap(route => route.stops.map(s => s.station)))];
 
 function smartSearch() {
     const from = document.getElementById('fromInput').value;
     const to = document.getElementById('toInput').value;
-    const trainNum = document.getElementById('trainNumberInput').value;
     const area = document.getElementById('resultsArea');
-    
-    let results = [];
-    if (trainNum) {
-        results = trains.filter(t => t.id === trainNum);
-    } else if (from && to) {
-        results = trains.filter(t => t.from === from && t.to === to);
-    }
-
     area.innerHTML = "";
-    if (results.length > 0) {
-        results.forEach(t => {
+
+    fullRoutes.forEach(route => {
+        const fromIndex = route.stops.findIndex(s => s.station === from);
+        const toIndex = route.stops.findIndex(s => s.station === to);
+
+        // إذا كان القطار يمر بالمحطتين وبالترتيب الصحيح
+        if (fromIndex !== -1 && toIndex !== -1 && fromIndex < toIndex) {
+            const depTime = route.stops[fromIndex].time;
+            const arrTime = route.stops[toIndex].time;
+
             area.innerHTML += `
                 <div class="result-card">
-                    <h2 style="color:#800020">قطار رقم ${t.id}</h2>
-                    <p><b>النوع:</b> ${t.type}</p>
-                    <p><b>المسار:</b> من ${t.from} إلى ${t.to}</p>
-                    <p><b>وقت القيام:</b> ${t.dep}</p>
-                    <p><b>سعر التذكرة:</b> ${t.price}</p>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2 style="color:#800020; margin:0;">قطار ${route.trainId}</h2>
+                        <span class="badge">${route.type}</span>
+                    </div>
+                    <hr style="border:0.5px solid #eee; margin:15px 0;">
+                    <p><b>🛫 قيام من ${from}:</b> <span style="color:#800020">${depTime}</span></p>
+                    <p><b>🛬 وصول إلى ${to}:</b> <span style="color:#800020">${arrTime}</span></p>
+                    <details>
+                        <summary style="cursor:pointer; color:#666;">عرض جدول المحطات بالكامل</summary>
+                        <ul style="font-size:14px; color:#333; padding-right:20px;">
+                            ${route.stops.map(s => `<li>${s.station}: ${s.time}</li>`).join('')}
+                        </ul>
+                    </details>
                 </div>`;
-        });
-    } else {
-        area.innerHTML = "<div class='result-card'>❌ لم يتم العثور على رحلات. تأكد من كتابة المحطات بشكل صحيح.</div>";
+        }
+    });
+
+    if (area.innerHTML === "") {
+        area.innerHTML = "<div class='result-card'>❌ لا توجد رحلة مباشرة بين هاتين المحطتين حالياً.</div>";
     }
 }
