@@ -1,49 +1,41 @@
-// تشغيل الخريطة
 var map = L.map('map').setView([26.8206, 30.8025], 6);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-// المواعيد
 const trains = [
-    { id: "901", from: "القاهرة", to: "الإسكندرية", time: "08:15 ص", price: "145 ج.م" },
-    { id: "980", from: "القاهرة", to: "المنيا", time: "08:00 ص", price: "155 ج.م" },
-    { id: "164", from: "المنيا", to: "القاهرة", time: "03:40 م", price: "55 ج.م" }
+    // خط القاهرة - الإسكندرية (بحري)
+    { id: "2025", from: "القاهرة", to: "الإسكندرية", time: "08:00 ص", type: "تالجو", price: "275 ج" },
+    { id: "901", from: "القاهرة", to: "الإسكندرية", time: "08:10 ص", type: "VIP", price: "145 ج" },
+    { id: "2023", from: "القاهرة", to: "الإسكندرية", time: "02:00 م", type: "تالجو", price: "275 ج" },
+    { id: "2022", from: "الإسكندرية", to: "القاهرة", time: "07:00 م", type: "تالجو", price: "275 ج" },
+    
+    // خط الصعيد (قبلي)
+    { id: "980", from: "القاهرة", to: "المنيا", time: "08:00 ص", type: "VIP", price: "155-250 ج" },
+    { id: "2010", from: "القاهرة", to: "المنيا", time: "10:00 ص", type: "VIP", price: "155-250 ج" },
+    { id: "980", from: "القاهرة", to: "أسيوط", time: "08:00 ص", type: "VIP", price: "195-250 ج" },
+    { id: "2030", from: "القاهرة", to: "أسوان", time: "07:00 م", type: "تالجو", price: "550-700 ج" },
+    { id: "982", from: "القاهرة", to: "أسوان", time: "12:00 م", type: "إسباني", price: "200 ج" },
+    { id: "164", from: "المنيا", to: "القاهرة", time: "03:40 م", type: "روسي", price: "55 ج" },
+    
+    // خط مطروح (صيفي)
+    { id: "939", from: "القاهرة", to: "مرسى مطروح", time: "05:50 ص", type: "ثالثة مكيفة", price: "150 ج" }
 ];
 
 function findTrain() {
     const from = document.getElementById('fromStation').value;
     const to = document.getElementById('toStation').value;
     const area = document.getElementById('resultsArea');
-
     const match = trains.filter(t => t.from === from && t.to === to);
 
+    area.innerHTML = match.length > 0 ? "<h3>الرحلات المتاحة اليوم:</h3>" : "";
     if (match.length > 0) {
-        area.innerHTML = "<h3>النتائج:</h3>";
         match.forEach(t => {
             area.innerHTML += `
                 <div class="result-card">
-                    <p><b>قطار:</b> ${t.id} | <b>موعد:</b> ${t.time}</p>
-                    <p><b>التذكرة:</b> ${t.price}</p>
+                    <p><b>قطار رقم:</b> ${t.id} (${t.type})</p>
+                    <p><b>قيام:</b> ${t.time} | <b>السعر التقريبي:</b> ${t.price}</p>
                 </div>`;
         });
     } else {
-        area.innerHTML = "<div class='result-card' style='background:#c0392b;'>❌ مفيش رحلات مباشرة حالياً</div>";
+        area.innerHTML = "<div class='result-card' style='background:#c0392b;'>❌ لا توجد رحلات مباشرة مسجلة لهذه الوجهة</div>";
     }
 }
-const trains = [
-    // خط القاهرة - الإسكندرية
-    { id: "901", from: "القاهرة", to: "الإسكندرية", time: "08:10 ص", type: "خدمة خاصة", price: "145 ج" },
-    { id: "911", from: "القاهرة", to: "الإسكندرية", time: "11:00 ص", type: "توربيني", price: "70 ج" },
-    { id: "915", from: "القاهرة", to: "الإسكندرية", time: "03:10 م", type: "إسباني", price: "80 ج" },
-    
-    // خط الصعيد (قبلي)
-    { id: "980", from: "القاهرة", to: "المنيا", time: "08:00 ص", type: "VIP", price: "155 ج" },
-    { id: "980", from: "القاهرة", to: "أسيوط", time: "08:00 ص", type: "VIP", price: "195 ج" },
-    { id: "980", from: "القاهرة", to: "أسوان", time: "08:00 ص", type: "VIP", price: "350 ج" },
-    { id: "2006", from: "القاهرة", to: "أسوان", time: "05:15 م", type: "VIP", price: "350 ج" },
-    { id: "164", from: "المنيا", to: "القاهرة", time: "03:40 م", type: "روسي", price: "55 ج" },
-    { id: "990", from: "سوهاج", to: "القاهرة", time: "06:00 ص", type: "إسباني", price: "130 ج" },
-    
-    // خطوط الأقصر وأسوان
-    { id: "2010", from: "القاهرة", to: "الأقصر", time: "10:00 ص", type: "VIP", price: "300 ج" },
-    { id: "982", from: "القاهرة", to: "أسوان", time: "12:00 م", type: "إسباني", price: "200 ج" }
-];
