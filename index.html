@@ -1,32 +1,20 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل قطارات مصر الشامل</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header><h1>🚆 دليل محطات وقطارات مصر</h1></header>
-    <div class="container">
-        <div class="search-box">
-            <label>من محطة (القيام):</label>
-            <select id="fromStation">
-                <option value="">اختر المحطة...</option>
-            </select>
-
-            <label>إلى محطة (الوصول):</label>
-            <select id="toStation">
-                <option value="">اختر المحطة...</option>
-            </select>
-
-            <button onclick="findTrain()">بحث عن مواعيد</button>
-        </div>
-        <div id="map"></div>
-        <div id="resultsArea"></div>
+<div class="search-box">
+    <div class="input-group">
+        <label>محطة القيام:</label>
+        <input type="text" id="fromInput" placeholder="اكتب اسم المحطة (مثلاً: القاهرة)" onkeyup="filterStations('from')">
+        <div id="fromList" class="autocomplete-list"></div>
     </div>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+
+    <div class="input-group">
+        <label>محطة الوصول:</label>
+        <input type="text" id="toInput" placeholder="اكتب اسم المحطة (مثلاً: المنيا)" onkeyup="filterStations('to')">
+        <div id="toList" class="autocomplete-list"></div>
+    </div>
+
+    <div class="input-group">
+        <label>أو ابحث برقم القطار مباشرة:</label>
+        <input type="number" id="trainNumberInput" placeholder="رقم القطار (مثلاً: 980)">
+    </div>
+
+    <button onclick="smartSearch()">بحث سريع</button>
+</div>
