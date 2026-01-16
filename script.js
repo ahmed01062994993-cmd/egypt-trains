@@ -55,6 +55,36 @@ function findTrain() {
                 <p><b>قطار رقم:</b> ${trip.id} (${trip.type})</p>
                 <p><b>الموعد:</b> ${trip.time} | <b>السعر:</b> ${trip.price}</p>
             </div>
-        `;
+        `;const allTrains = [
+    { id: "901", from: "القاهرة", to: "الإسكندرية", departure: "08:10 AM", type: "VIP", price: "145 LE" },
+    { id: "980", from: "القاهرة", to: "المنيا", departure: "08:00 AM", type: "VIP", price: "155 LE" },
+    { id: "164", from: "المنيا", to: "القاهرة", departure: "03:40 PM", type: "روسي", price: "50 LE" },
+    { id: "990", from: "القاهرة", to: "أسيوط", departure: "04:00 PM", type: "إسباني", price: "120 LE" },
+    { id: "2008", from: "الإسكندرية", to: "أسوان", departure: "07:00 PM", type: "تالجو", price: "600 LE" }
+];
+
+function findTrain() {
+    let from = document.getElementById('fromStation').value;
+    let to = document.getElementById('toStation').value;
+    let display = document.getElementById('displayArea');
+
+    // تصفية النتائج
+    let results = allTrains.filter(t => t.from === from && t.to === to);
+
+    display.style.display = "block";
+    if (results.length > 0) {
+        display.innerHTML = "<h3 style='color:#ff9800;'>الرحلات المتاحة:</h3>";
+        results.forEach(t => {
+            display.innerHTML += `
+                <div style="background:#222; margin:10px 0; padding:15px; border-radius:10px; border-right:5px solid #ff9800; text-align:right;">
+                    <p><b>قطار رقم:</b> ${t.id} (${t.type})</p>
+                    <p><b>القيام:</b> ${t.departure} | <b>السعر:</b> ${t.price}</p>
+                </div>`;
+        });
+    } else {
+        display.innerHTML = "<h3 style='color:#ff4444;'>❌ لا توجد رحلات مباشرة حالياً</h3>";
+    }
+}
+
     });
 }
