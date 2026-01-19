@@ -3,25 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قطارات مصر - بحث ذكي</title>
+    <title>مواعيد قطارات مصر</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header><h1>🚆 بحث قطارات مصر</h1></header>
-    <div class="container">
-        <div class="search-box">
-            <input type="text" id="fromInput" placeholder="محطة القيام..." onkeyup="filterStations('from')">
-            <div id="fromList" class="autocomplete-list"></div>
 
-            <input type="text" id="toInput" placeholder="محطة الوصول..." onkeyup="filterStations('to')">
-            <div id="toList" class="autocomplete-list"></div>
-
-            <input type="number" id="trainNumberInput" placeholder="أو رقم القطار مباشرة...">
-            
-            <button onclick="smartSearch()">بحث الآن</button>
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#" onclick="showSection('home')">الرئيسية</a>
+            <a href="#" onclick="showSection('search-page')">المواعيد</a>
         </div>
-        <div id="resultsArea"></div>
-    </div>
+        <div class="logo">
+            <img src="https://www.raileg.com/assets/img/logo.png" alt="Logo">
+        </div>
+    </nav>
+
+    <section id="home" class="hero-section">
+        <div class="overlay">
+            <div class="hero-content">
+                <h1>مواعيد قطارات مصر</h1>
+                <p class="subtitle">إصدار تجريبي - غير رسمي ولا يتبع أي جهة حكومية</p>
+                <p>أول تطبيق ويب لمواعيد القطارات في مصر</p>
+                <p>ابحث عن قطارك في 3 خطوات اختر محطتي المغادرة والوصول ثم اضغط على بحث</p>
+                <button class="btn-main" onclick="showSection('search-page')">بحث في المواعيد</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="search-page" class="search-section" style="display: none;">
+        <div class="top-bg"></div>
+        <div class="search-container">
+            <div class="search-icon-circle">
+                <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" width="30">
+            </div>
+            
+            <div class="search-form">
+                <select id="fromStation">
+                    <option value="">محطة المغادرة</option>
+                </select>
+
+                <div class="swap-icon">⇅</div>
+
+                <select id="toStation">
+                    <option value="">محطة الوصول</option>
+                </select>
+
+                <select id="trainType">
+                    <option value="all">الكل</option>
+                </select>
+
+                <button class="btn-search" onclick="startSearch()">بحث</button>
+            </div>
+            
+            <div class="social-links">
+                <a href="#">لمتابعة أخبار التحديثات تابعنا على Facebook</a>
+            </div>
+        </div>
+    </section>
+
     <script src="script.js"></script>
 </body>
 </html>
