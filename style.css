@@ -1,33 +1,72 @@
-.badge {
-    background-color: #1a1a1a;
+body {
+    background-color: #121212; /* الأسود الليلي */
+    color: #ffffff;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 15px;
+    direction: rtl;
+}
+
+header h1 {
+    text-align: center;
+    color: #ff9800; /* اللون البرتقالي المميز */
+    padding: 10px;
+}
+
+.search-box {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #333;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+    background: #333;
     color: white;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 12px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: #ff9800;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.result-card {
+    background: #2e7d32; /* اللون الأخضر للنتائج */
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.autocomplete-list {
+    background: #333;
+    border: 1px solid #444;
+    position: absolute;
+    width: 90%;
+    z-index: 1000;
+    border-radius: 8px;
+}
+
+.autocomplete-list div {
+    padding: 10px;
+    border-bottom: 1px solid #444;
+    cursor: pointer;
 }
 
 details summary {
-    margin-top: 10px;
-    font-weight: bold;
-    outline: none;
-}
-
-ul {
-    list-style-type: none;
-    border-right: 2px solid #800020;
-    margin-top: 10px;
-}
-
-li {
-    margin-bottom: 5px;
-    position: relative;
-}
-
-li::before {
-    content: "•";
-    color: #800020;
-    font-weight: bold;
-    display: inline-block; 
-    width: 1em;
-    margin-right: -1em;
+    color: #ff9800;
+    padding: 5px 0;
 }
