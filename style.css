@@ -1,87 +1,65 @@
-/* الألوان الأساسية */
-:root {
-    --blue: #3b5998;
-    --dark-bg: rgba(0, 0, 0, 0.7);
+/* تنسيق منطقة النتائج */
+.results-area {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
 }
 
-body, html {
-    margin: 0; padding: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    height: 100%;
+/* تنسيق كارت القطار الواحد */
+.train-card {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-/* Navbar */
-.navbar {
-    background: #000;
+.train-card h3 {
+    margin: 0 0 5px 0;
+    color: var(--blue);
+    font-size: 1.3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    box-sizing: border-box;
 }
-.nav-links a { color: white; text-decoration: none; margin-left: 20px; font-weight: bold; }
-.logo img { height: 50px; border-radius: 50%; border: 2px solid #800020; }
 
-/* الرئيسية (Hero) */
-.hero-section {
-    background: url('https://www.raileg.com/assets/img/hero-bg.jpg') no-repeat center center/cover;
-    height: 100vh;
-    position: relative;
+.train-card .type-badge {
+    background: #eee;
+    color: #555;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: normal;
 }
-.overlay {
-    background: var(--dark-bg);
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
+
+.train-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #444;
 }
-.hero-content h1 { font-size: 2.5rem; margin-bottom: 10px; }
-.subtitle { color: #f39c12; font-size: 0.9rem; margin-bottom: 30px; }
-.btn-main {
-    background: transparent;
-    border: 2px solid white;
-    color: white;
-    padding: 10px 30px;
-    border-radius: 5px;
-    font-size: 1.2rem;
+
+.train-card .details-summary {
+    color: var(--blue);
     cursor: pointer;
-    margin-top: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-top: 10px;
 }
 
-/* واجهة البحث */
-.search-section { background: #fff; height: 100vh; }
-.top-bg { 
-    background: url('https://www.raileg.com/assets/img/search-bg.jpg') no-repeat center/cover;
-    height: 40%;
+.train-card ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: #666;
+    border-left: 2px solid #eee;
+    padding-left: 10px;
 }
-.search-container {
-    max-width: 400px;
-    margin: -50px auto 0;
-    padding: 20px;
-    position: relative;
+
+.train-card ul li {
+    margin-bottom: 5px;
 }
-.search-icon-circle {
-    background: white;
-    width: 60px; height: 60px;
-    border-radius: 50%;
-    display: flex; justify-content: center; align-items: center;
-    margin: 0 auto 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-.search-form select {
-    width: 100%; padding: 12px; margin-bottom: 10px;
-    border: 1px solid #ccc; border-radius: 5px;
-    background: #f9f9f9;
-}
-.swap-icon { text-align: center; font-size: 1.5rem; margin: 5px 0; color: #333; }
-.btn-search {
-    width: 100%; background: var(--blue); color: white;
-    padding: 12px; border: none; border-radius: 5px;
-    font-size: 1.1rem; cursor: pointer;
-}
-.social-links { text-align: center; margin-top: 20px; font-size: 0.8rem; }
